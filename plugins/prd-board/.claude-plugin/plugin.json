@@ -1,6 +1,6 @@
 {
   "name": "prd-board",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "기획서를 검사해서 한 장의 시각화 보드로 그려주는 Be_Ready_AI 플러그인",
   "author": {
     "name": "Be_Ready_AI"
