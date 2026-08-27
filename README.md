@@ -2,25 +2,109 @@
 
 Be_Ready_AI [입문] 워크샵 참가자용 플러그인입니다.
 
-## 설치
+> ⚠️ **`/plugin` 슬래시 명령으로는 설치되지 않습니다.**
+> Claude Desktop 의 Code 탭에서는 동작하지 않습니다. 아래 방법으로 하세요.
 
-Claude Desktop [Code] 탭의 입력창에 한 줄씩 붙여넣으세요. 설치 방법 전체는 워크샵 10일차 가이드에 있습니다.
+---
+
+## 설치 — Claude Desktop
+
+설치는 **앱 설정에서 클릭 몇 번**입니다. 타이핑할 것은 주소 한 줄뿐입니다.
+
+**① 확장 프로그램 화면을 엽니다.**
+Claude Desktop 설정을 열고 **확장 프로그램** → **확장 프로그램 추가**.
+
+**② 가게 주소를 등록합니다.**
+열린 창 왼쪽에서 **코드 모양 아이콘(플러그인)** 을 누르고 **마켓플레이스 추가** → **저장소 추가**.
+주소 칸에 아래를 붙여넣으세요.
 
 ```
-/plugin marketplace add bradyk9411/be-ready-plugins
+https://github.com/Bradyk9411/be-ready-plugins
 ```
 
+**③ 설치합니다.**
+방금 등록한 **be-ready** 안에 **prd-board** 가 보입니다. 골라서 설치하세요.
+어디에 설치할지 물으면 **User**(내 계정 전체)를 고릅니다.
+
+**④ 확인합니다.**
+[Code] 탭으로 돌아와 새 대화를 열고 입력창에:
+
 ```
-/plugin install prd-board@be-ready
+시각화 기능 설치됐어? 뭘 할 수 있는지 한 줄로 말해줘.
 ```
+
+"설치되어 있습니다"라고 답하면 끝입니다.
+못 알아보면 **Claude Desktop 을 완전히 종료했다가 다시 열고** 한 번 더 물어보세요.
+
+> **놀라지 마세요, 정상입니다.** 등록할 때 "Anthropic이 관리하지 않는다"는 경고가 나옵니다.
+> 공식 목록 밖에서 가져오는 것이라 붙는 안내입니다.
+
+---
+
+## 설치 — VS Code 등 IDE · 터미널
+
+터미널이 있으면 명령 두 줄입니다.
+
+```bash
+claude plugin marketplace add https://github.com/Bradyk9411/be-ready-plugins
+```
+
+```bash
+claude plugin install prd-board@be-ready
+```
+
+확인은 이걸로 합니다.
+
+```bash
+claude plugin list
+```
+
+`prd-board@be-ready` 가 **Status: ✔ enabled** 로 보이면 됩니다.
+
+> ⚠️ **주소는 `https://` 를 붙인 전체 주소로 넣으세요.**
+> 축약형(`Bradyk9411/be-ready-plugins`)도 받아들여지지만 **SSH 로 내려받으려 해서**,
+> 깃허브에 SSH 키를 등록해두지 않았으면 여기서 막힙니다.
+> `github.com/...` 처럼 `https://` 없이 넣으면 아예 오류가 납니다.
+
+---
+
+## 쓰는 법
+
+기획서가 있는 폴더에서 이렇게 말하면 됩니다.
+
+> PRD.md를 보드로 만들어줘
+
+파일 이름이 달라도 "이 기획서 시각화해줘" 로 통합니다.
+입력창에 **`/prd-board`** 를 쳐서 불러도 됩니다.
 
 ## 들어 있는 것
 
-- **prd-board** (PRD 시각화): PRD.md를 읽어 한 장의 시각화 보드(PRD보드.html)로 그립니다. 설치 후 "PRD.md를 보드로 만들어줘"라고 말하면 됩니다.
+- **prd-board** (PRD 시각화): PRD.md를 읽어 한 장의 시각화 보드(PRD보드.html)로 그립니다.
+  파일과 함께 **비공개 링크로도 발행**되고, "다시 그려줘"라고 하면 **같은 링크가 최신으로 바뀝니다.**
 
-새 버전이 나오면 워크샵 게시판에서 알려드립니다. 아래 한 줄을 붙여넣으면 바로 최신 버전이 됩니다.
+---
 
+## 새 버전이 나오면
+
+> ⚠️ **자동으로 갱신되지 않습니다.** 직접 한 번 해주셔야 합니다.
+> 안 하면 옛 버전이 계속 돌고, 새로 붙은 기능이 있는 줄도 모른 채 지나갑니다.
+
+지금 쓰는 버전이 궁금하면 이렇게 물어보세요.
+
+> 시각화 기능 몇 버전이야?
+
+**터미널을 쓰신다면** 두 줄을 차례로 실행합니다.
+
+```bash
+claude plugin marketplace update be-ready
 ```
-/plugin marketplace update be-ready
+
+```bash
+claude plugin update prd-board@be-ready
 ```
 
+첫 줄은 **가게 목록**을 새로 받아오고, 둘째 줄이 **설치된 플러그인**을 바꿉니다.
+첫 줄만으로는 설치본이 바뀌지 않을 수 있으니 두 줄 다 하세요.
+플러그인이 바뀌면 **Claude 를 다시 켜야** 적용됩니다.
+
+**Claude Desktop 을 쓰신다면** 새 버전 공지에 화면 그대로 안내해 드리겠습니다.
