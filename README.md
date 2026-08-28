@@ -1,6 +1,6 @@
 # Be_Ready_AI 플러그인
 
-Be_Ready_AI [입문] 워크샵 참가자용 플러그인입니다.
+Be_Ready_AI 워크샵 참가자용 플러그인입니다. [입문]은 **prd-board**, 기획자 인턴 워크샵은 **planner-board** 를 설치하시면 됩니다.
 
 ## 설치 — Claude Desktop
 
@@ -18,7 +18,7 @@ https://github.com/Bradyk9411/be-ready-plugins
 ```
 
 **③ 설치합니다.**
-방금 등록한 **be-ready** 안에 **prd-board** 가 보입니다. 골라서 설치하세요.
+방금 등록한 **be-ready** 안에 플러그인들이 보입니다. 내 워크샵의 것([입문]=**prd-board**, 기획자 인턴=**planner-board**)을 골라서 설치하세요.
 어디에 설치할지 물으면 **User**(내 계정 전체)를 고릅니다.
 
 **④ 확인합니다.**
@@ -48,13 +48,19 @@ claude plugin marketplace add https://github.com/Bradyk9411/be-ready-plugins
 claude plugin install prd-board@be-ready
 ```
 
+기획자 인턴 워크샵 참가자는 아래를 설치합니다.
+
+```bash
+claude plugin install planner-board@be-ready
+```
+
 확인은 이걸로 합니다.
 
 ```bash
 claude plugin list
 ```
 
-`prd-board@be-ready` 가 **Status: ✔ enabled** 로 보이면 됩니다.
+설치한 플러그인이 **Status: ✔ enabled** 로 보이면 됩니다.
 
 > ⚠️ **주소는 `https://` 를 붙인 전체 주소로 넣으세요.**
 > 축약형(`Bradyk9411/be-ready-plugins`)도 받아들여지지만 **SSH 로 내려받으려 해서**,
@@ -72,10 +78,18 @@ claude plugin list
 파일 이름이 달라도 "이 기획서 시각화해줘" 로 통합니다.
 입력창에 **`/prd-board`** 를 쳐서 불러도 됩니다.
 
+기획자 인턴 워크샵에서는 이렇게 말하면 됩니다.
+
+> 기획자 인턴 보드 그려줘
+
+**`/planner-board`** 로 불러도 됩니다.
+
 ## 들어 있는 것
 
 - **prd-board** (PRD 시각화): PRD.md를 읽어 한 장의 시각화 보드(PRD보드.html)로 그립니다.
   파일과 함께 **비공개 링크로도 발행**되고, "다시 그려줘"라고 하면 **같은 링크가 최신으로 바뀝니다.**
+- **planner-board** (기획자 인턴 플러그인): 문제정의·PRD·도구지도·프로세스 문서를 읽어
+  왜·무엇·문제정의와 **도구·작동 흐름**이 담긴 보드(기획자보드.html)로 그립니다. 링크 발행 방식은 같습니다.
 
 ---
 
@@ -97,6 +111,8 @@ claude plugin marketplace update be-ready
 ```bash
 claude plugin update prd-board@be-ready
 ```
+
+(기획자 인턴 워크샵은 `planner-board@be-ready` 로 바꿔 실행하세요.)
 
 첫 줄은 **가게 목록**을 새로 받아오고, 둘째 줄이 **설치된 플러그인**을 바꿉니다.
 첫 줄만으로는 설치본이 바뀌지 않을 수 있으니 두 줄 다 하세요.

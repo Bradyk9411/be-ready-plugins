@@ -9,6 +9,11 @@
       "name": "prd-board",
       "source": "./plugins/prd-board",
       "description": "PRD(기획서)를 한 장의 시각화 보드로 그려주는 플러그인. [입문] 워크샵 동봉물."
+    },
+    {
+      "name": "planner-board",
+      "source": "./plugins/planner-board",
+      "description": "기획자 인턴 플러그인. 문제정의·PRD·도구지도·프로세스를 읽어 도구와 프로세스가 담긴 한 장의 보드로 그린다. 기획자 인턴 워크샵 동봉물."
     }
   ]
 }

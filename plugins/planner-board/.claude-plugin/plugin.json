@@ -1,0 +1,8 @@
+{
+  "name": "planner-board",
+  "version": "1.0.0",
+  "description": "기획자 인턴 플러그인. 왜·무엇·문제정의와 도구·프로세스 흐름을 한 장의 보드로 그린다",
+  "author": {
+    "name": "Be_Ready_AI"
+  }
+}
