@@ -1,17 +1,17 @@
 ---
 name: planner-board
-description: 기획 문서들(문제정의·PRD·도구지도·프로세스)을 읽어 검사하고, 왜·무엇·문제정의와 도구·프로세스 흐름이 담긴 한 장의 보드 HTML로 그린다. "기획자 인턴 보드 그려줘", "도구 지도 보여줘", "프로세스 시각화해줘", "다시 그려줘" 요청에 사용한다. 설치 확인 질문("기획자 인턴 플러그인 설치됐어?")에는 버전과 기능을 한 줄로 답한다.
+description: 기획 문서들(문제정의·PRD·도구지도·프로세스)을 읽어 검사하고, 문제정의·기획서 연계 매핑·도구·프로세스 흐름이 담긴 한 장의 보드 HTML로 그린다. "기획자 인턴 보드 그려줘", "도구 지도 보여줘", "프로세스 시각화해줘", "다시 그려줘" 요청에 사용한다. 설치 확인 질문("기획자 인턴 플러그인 설치됐어?")에는 버전과 기능을 한 줄로 답한다.
 ---
 
-# 기획자 인턴 보드 (v1.0.0)
+# 기획자 인턴 보드 (v1.1.0)
 
-기획 문서 네 개를 **검사해서** 그림 한 장으로 바꾼다. 보드는 두 부분이다. 위는 **기획의 뼈대**(왜 만드는가 · 무엇을 얻으면 되는가 · 문제정의, 그리고 기획서와의 연결), 아래는 **작동의 흐름**(단계마다 어느 도구에서, 누가, 어떤 데이터를 주고받는지). 예쁘게만 그리고 검사를 건너뛰면 이 보드는 할 일을 안 한 것이다.
+기획 문서 네 개를 **검사해서** 그림 한 장으로 바꾼다. 보드는 네 부분이다. ① **문제정의** (조립된 한 문장 + 배경·당사자·솔루션), ② **기획서와의 연계** (PRD 기능마다 어느 단계·도구가 맡는지 매핑), ③ **도구 선반** (각 도구가 무슨 일을 하는지 + 비용), ④ **작동의 흐름** (단계마다 어느 도구에서, 누가, 어떤 데이터를 주고받는지). 예쁘게만 그리고 검사를 건너뛰면 이 보드는 할 일을 안 한 것이다.
 
 사용자는 코딩을 모르는 1인 사업자다. 전문용어 없이, 쉬운 한국어로만 말한다.
 
 ## 설치 확인 질문을 받으면
 
-"기획자 인턴 플러그인 v1.0.0이 설치되어 있습니다. 기획 문서를 검사해서 도구·프로세스 보드 한 장으로 그려드립니다." 한 줄로 답하고 끝낸다.
+"기획자 인턴 플러그인 v1.1.0이 설치되어 있습니다. 기획 문서를 검사해서 문제정의·도구·프로세스 보드 한 장으로 그려드립니다." 한 줄로 답하고 끝낸다.
 
 ## 1. 재료를 잡는다
 
@@ -21,7 +21,7 @@ description: 기획 문서들(문제정의·PRD·도구지도·프로세스)을 
 |---|---|---|
 | 문제정의 | `문제정의.md` | 배경 · 당사자 · 솔루션 세 문장 (왜의 기록) |
 | 기획서 | `PRD.md` | 기능 목록 · 완료 기준 · 필요한 도구 표 |
-| 도구지도 | `도구지도.md` | 도구별 무료/유료 · 월 비용 · 합계 |
+| 도구지도 | `도구지도.md` | 도구별 역할 · 무료/유료 · 월 비용 · 합계 |
 | 프로세스 | `프로세스.md` | 단계 순서 · 단계마다 도구/행위자/데이터 |
 
 - 사용자가 다른 파일을 지목하면 그것을 쓴다.
@@ -30,22 +30,38 @@ description: 기획 문서들(문제정의·PRD·도구지도·프로세스)을 
 
 **잡은 재료를 한 문장으로 먼저 말하고 시작한다.** (예: "문제정의·PRD·도구지도·프로세스 네 파일로 그립니다.")
 
-## 2. 기획의 뼈대를 채운다 (보드 상단)
-
 **절대 규칙: 문서에 없는 내용을 지어내서 채우지 않는다.** 없으면 「비어 있음」.
 
-1. **왜 만드는가**: 문제정의의 배경 문장, 또는 문서에 적힌 「진짜 이유」. PRD의 목적 문장으로 보충해도 되지만 문서에 있는 말로만.
-2. **무엇을 얻으면 되는가**: PRD 맨 위의 완료 기준. 없으면 문제정의의 솔루션 문장. 이 칸이 비면 뒤 검사에서 반드시 걸린다.
-3. **문제정의**: 배경 · 당사자 · 솔루션 세 문장을 그대로 옮긴다.
-4. **기획서와의 연결**: 이 보드가 어느 기획서에 붙어 있는지 보여주는 칸이다.
-   - 기획서(PRD)의 이름(제목)과 기능 개수를 적는다.
-   - **PRD의 기능마다 문제정의의 솔루션과 이어지는지 대본다.** 솔루션과 무관해 보이는 기능이 있으면 그 이름을 「어긋남」으로 적는다. 판단이 안 서면 적지 않는다. 억지로 찾지 않는다.
+## 2. 문제정의를 조립한다 (보드 맨 위)
 
-## 3. 작동의 흐름을 그린다 (보드 하단, 왼쪽에서 오른쪽)
+문제정의는 이 보드에서 가장 크게, 가장 명확하게 보여야 한다. 목록으로 나열하지 말고 **두 문장으로 조립한다**:
+
+> 「**(누가)** 는 **(상황)** 에서 **(어려움)** 때문에 **(잃는 것)** 을 잃는다. 그래서 **(무엇이 되어야 하는가)**.」
+
+- 문서(문제정의·PRD)에 있는 말로만 조립한다. 조립이 어려우면 문서의 문제 문장을 그대로 쓴다.
+- 조립문 아래에 원문 세 줄을 라벨(배경 · 당사자 · 솔루션)과 함께 그대로 싣는다. 조립문은 요약이고, 원문이 근거다.
+- 그 아래 두 칸: **왜 만드는가** (문서에 적힌 진짜 이유), **무엇을 얻으면 되는가** (PRD 맨 위의 완료 기준. 없으면 솔루션 문장). 완료 기준이 비면 뒤 검사에서 반드시 걸린다.
+
+## 3. 기획서와의 연계를 매핑한다
+
+이 보드가 어느 기획서(PRD)에 붙어 있고, 기획서의 약속이 흐름에서 실제로 지켜지는지 보여주는 표다. **PRD의 기능마다 한 줄씩, 빠짐없이** 만든다.
+
+| 칸 | 채우는 법 |
+|---|---|
+| 기능 | PRD의 기능 이름 |
+| 맡는 단계 | 프로세스에서 그 기능을 수행하는 단계 번호와 이름. 여러 개면 모두 |
+| 붙는 도구 | 그 단계의 도구 (없으면 PRD 「필요한 도구」 표에서) |
+| 상태 | **이어짐**(단계와 도구가 모두 있다) · **구멍**(흐름에 그 기능을 맡는 단계가 없다) · **도구 없음**(단계는 있는데 도구가 안 정해졌다) |
+
+- 「구멍」과 「도구 없음」은 그대로 체크사항이 된다.
+- 반대 방향도 본다: **흐름에는 있는데 PRD의 어느 기능에도 속하지 않는 단계**가 있으면 검사에 올린다. 기획서에 없는 일이 끼어든 것이다.
+- 어느 기능이 어느 단계인지 문서만으로 판단이 안 서면 상태를 비우지 말고 「구멍」으로 적는다. 좋게 봐주지 않는다.
+
+## 4. 작동의 흐름을 그린다 (왼쪽에서 오른쪽)
 
 ### 도구 선반
 
-도구지도의 도구들을 칩으로 나열한다. 칩마다 이름과 월 비용(무료면 "무료")을 단다. 도구지도에 합계가 있으면 선반 끝에 **월 합계**를 적는다. 도구지도가 없으면 PRD의 「필요한 도구」 표로 대신하되 비용 칸은 「비어 있음」.
+도구지도의 도구들을 칩으로 나열한다. 칩마다 세 줄: **이름 · 무슨 일을 하는가(역할 한 줄) · 월 비용**(무료면 "무료"). 역할은 도구지도나 PRD에 적힌 말로 쓰고, 없으면 널리 합의된 한 줄 소개(예: 깃허브 = 작업물 보관)로 채우되 사용자의 기획에 맞춘 설명(예: "견적서 파일을 보관")이 문서에 있으면 그쪽을 쓴다. 도구지도에 합계가 있으면 선반 끝에 **월 합계**를 적는다. 도구지도가 없으면 PRD의 「필요한 도구」 표로 대신하되 비용 칸은 「비어 있음」.
 
 ### 흐름 노드
 
@@ -58,7 +74,7 @@ description: 기획 문서들(문제정의·PRD·도구지도·프로세스)을 
 
 **행위자가 「나」인 노드는 강조된다** (`fnode me` 클래스). 되돌릴 수 없는 순간(돈 · 발송 · 삭제)에 사용자가 서 있는 지점이라, 이 보드에서 가장 눈에 띄어야 한다.
 
-## 4. 검사 렌즈 여섯 개
+## 5. 검사 렌즈 일곱 개
 
 각 항목을 문서에 대보고, **걸리는 것만** 올린다. 억지로 개수를 채우지 마라.
 
@@ -66,10 +82,11 @@ description: 기획 문서들(문제정의·PRD·도구지도·프로세스)을 
 2. **되돌릴 수 없는 단계에 내가 서 있나**: 돈이 오가거나, 손님에게 나가거나, 지우는 단계인데 행위자가 「나」가 아니다
 3. **이 단계는 누가 하나**: 행위자가 안 적힌 단계
 4. **선반에 없는 도구**: 흐름에는 나오는데 도구지도에 없어서 비용을 모르는 도구
-5. **끝이 정해져 있나**: 완료 기준이 없거나, 있어도 확인할 방법이 안 적혀 있다
-6. **솔루션과 결말이 맞나**: 흐름의 마지막 결과가 문제정의의 솔루션 문장과 다른 것을 내놓는다
+5. **기획서와 흐름이 맞나**: §3 매핑의 「구멍」·「도구 없음」, 그리고 PRD에 없는 유령 단계
+6. **끝이 정해져 있나**: 완료 기준이 없거나, 있어도 확인할 방법이 안 적혀 있다
+7. **솔루션과 결말이 맞나**: 흐름의 마지막 결과가 문제정의의 솔루션 문장과 다른 것을 내놓는다
 
-## 5. 판정은 셋이다. 모르는 것을 아는 척하지 않는다
+## 6. 판정은 셋이다. 모르는 것을 아는 척하지 않는다
 
 - **확인**: 문서에 있고 말이 된다
 - **아직**: 문서에 없거나 어긋난다. 이건 그대로 **체크사항**이 된다
@@ -77,11 +94,11 @@ description: 기획 문서들(문제정의·PRD·도구지도·프로세스)을 
 
 문서가 언급한 파일은 폴더에서 실제로 찾아본다. 확인해보지 않고 「못 봄」으로 적지 않는다. 「못 봄」과 「아직」을 섞지 마라.
 
-## 6. 정본은 언제나 문서다
+## 7. 정본은 언제나 문서다
 
 보드는 문서를 비추는 거울이다. 보드에서 고칠 것이 보이면 **문서(문제정의·PRD·도구지도·프로세스)를 고치고 보드를 다시 그린다.** 보드에만 있고 문서에 없는 내용을 만들지 않는다.
 
-## 7. HTML 파일로 저장하고, 링크로 발행한다
+## 8. HTML 파일로 저장하고, 링크로 발행한다
 
 아래 템플릿을 그대로 쓰고 `{중괄호}` 자리만 문서 내용으로 바꾼다. 디자인(색·글꼴·구조)은 바꾸지 않는다. 완성본을 문서와 같은 폴더에 `기획자보드.html`로 저장한다(있으면 덮어쓴다).
 
@@ -101,14 +118,15 @@ description: 기획 문서들(문제정의·PRD·도구지도·프로세스)을 
 ### 채우는 방법
 
 - `{도구이름}` `{한줄소개}`: 헤더. PRD의 제목과 한 줄 소개. 없으면 "비어 있음".
-- 뼈대 카드 셋: `{왜문장}` `{무엇문장}` `{문제정의셋}`(세 문장을 `<li>` 셋으로). 비면 `<p class="empty">비어 있음</p>`.
-- 연결 카드: `{기획서이름}` `{기능수}`. 어긋난 기능이 있으면 `{어긋남목록}`을 `<li class="warn">` 반복으로, 없으면 그 `<ul>`을 `<p class="fine">기능이 모두 솔루션과 이어집니다</p>`로 바꾼다.
-- 도구 선반: `<!-- 도구 칩 -->` 블록을 도구 수만큼 반복. `{비용}`은 "무료" 또는 "월 ○○". `{월합계}`가 없으면 `.shelf-total` 블록을 지운다.
+- 문제정의 카드: `{조립문}`은 §2의 두 문장. `{배경}` `{당사자}` `{솔루션}`은 문제정의 원문. 원문이 없으면 그 줄에 `<p class="empty">비어 있음</p>`.
+- `{왜문장}` `{무엇문장}`: §2의 두 칸. 비면 `<p class="empty">비어 있음</p>`.
+- 연계 매핑: `<!-- 매핑 행 -->` 블록을 PRD 기능 수만큼 반복. 상태 배지는 클래스와 글자를 함께 바꾼다: `ln-ok`/이어짐 · `ln-gap`/구멍 · `ln-tool`/도구 없음. **색만 바꾸고 글자를 그대로 두지 마라.** 유령 단계는 매핑 표가 아니라 검사 결과에 적는다.
+- 도구 칩: `<!-- 도구 칩 -->` 블록을 도구 수만큼 반복. `{역할}`은 한 줄, `{비용}`은 "무료" 또는 "월 ○○"(유료면 `class="c paid"`). `{월합계}`가 없으면 `.shelf-total` 블록을 지운다.
 - 흐름 노드: `<!-- 흐름 노드 -->` 블록을 단계 수만큼 반복, 마지막 노드 뒤의 `<div class="link"></div>`는 지운다.
-  - 행위자 배지는 클래스와 글자를 함께 바꾼다: `act-user`/손님 · `act-me`/나 · `act-ai`/AI · `act-auto`/자동 · `act-none`/누가?. **색만 바꾸고 글자를 그대로 두지 마라.**
+  - 행위자 배지: `act-user`/손님 · `act-me`/나 · `act-ai`/AI · `act-auto`/자동 · `act-none`/누가?. 클래스와 글자를 함께 바꾼다.
   - 행위자가 「나」인 노드는 `class="fnode me"`로 바꾸고 배지 옆에 `<span class="gate">내가 확인</span>`을 단다.
   - DATA 줄에 넣을 내용이 없으면 그 `<div class="data">` 블록을 지운다.
-- `{검사결과}`: §5의 판정을 `<div class="check">` 블록 반복으로. 클래스는 `v-ok`(확인) · `v-no`(아직) · `v-blind`(못 봄).
+- `{검사결과}`: §6의 판정을 `<div class="check">` 블록 반복으로. 클래스는 `v-ok`(확인) · `v-no`(아직) · `v-blind`(못 봄).
 - `{체크목록}`: 「아직」 판정을 `<li>` 반복. 하나도 없으면 `<section class="card checks">` 블록 전체를 삭제한다.
 - 그 외 구조·클래스명·스타일은 그대로 둔다.
 
@@ -135,18 +153,34 @@ header p{color:var(--sub)}
 .card ul{list-style:none;display:grid;gap:6px}
 .card li{padding-left:14px;position:relative;color:var(--sub)}
 .card li::before{content:"";position:absolute;left:0;top:.72em;width:5px;height:5px;border-radius:50%;background:var(--mut)}
-.card li.warn{color:var(--danger)}
-.card li.warn::before{background:var(--danger)}
 .stmt{color:var(--ink);font-size:16px}
-.fine{color:var(--ok);font-size:14px}
-.three{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:16px}
+.hero{border-color:var(--forest)}
+.hero h2{color:var(--volt)}
+.stmt-xl{font-size:19px;font-weight:700;color:var(--ink);line-height:1.55}
+.pd{display:grid;gap:7px;margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+.pd .row{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start}
+.pd .lab{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--volt);padding-top:5px}
+.pd .txt{color:var(--sub);font-size:14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .sectionlabel{font-size:13px;font-weight:500;color:var(--mut);letter-spacing:.08em;padding:6px 4px 0}
-.shelf{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.chip{display:inline-flex;gap:8px;align-items:baseline;border:1px solid var(--line);border-radius:6px;padding:5px 12px;background:var(--card)}
-.chip .t{font-weight:500;color:var(--ink);font-size:14px}
+.map{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.map .mhead,.maprow{display:grid;grid-template-columns:1.1fr 1.2fr .8fr 84px;gap:0 14px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--line)}
+.map .mhead{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--mut);padding:8px 16px}
+.maprow:last-child{border-bottom:none}
+.maprow .f{color:var(--ink);font-weight:500;font-size:14px}
+.maprow .s{color:var(--sub);font-size:13px}
+.maprow .tl{color:var(--sub);font-size:13px}
+.ln{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;border:1px solid var(--line);border-radius:3px;padding:1px 8px;justify-self:start;align-self:center;white-space:nowrap}
+.ln-ok{border-color:var(--ok);color:var(--ok)}
+.ln-gap{border-color:var(--danger);color:var(--danger)}
+.ln-tool{border-color:var(--mut);color:var(--sub)}
+.shelf{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+.chip{display:grid;gap:3px;border:1px solid var(--line);border-radius:6px;padding:9px 14px;background:var(--card);min-width:150px}
+.chip .t{font-weight:700;color:var(--ink);font-size:14px}
+.chip .r{font-size:12px;color:var(--mut);line-height:1.45}
 .chip .c{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut)}
 .chip .c.paid{color:var(--volt)}
-.shelf-total{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--volt)}
+.shelf-total{margin-left:auto;align-self:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--volt)}
 .canvas{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:
   radial-gradient(circle,#2A2724 1px,transparent 1px) 0 0/22px 22px,var(--bg);padding:26px 22px}
 .flow{display:flex;align-items:stretch;min-width:max-content}
@@ -180,7 +214,7 @@ header p{color:var(--sub)}
 .empty{color:var(--danger);font-size:14px}
 .empty::before{content:"⚠ "}
 footer{color:var(--mut);font-size:12px;text-align:center;padding-top:8px}
-@media (max-width:760px){.three{grid-template-columns:1fr}.check{grid-template-columns:1fr;gap:2px}}
+@media (max-width:760px){.two{grid-template-columns:1fr}.map .mhead{display:none}.maprow{grid-template-columns:1fr;gap:4px}.check{grid-template-columns:1fr;gap:2px}}
 </style>
 </head>
 <body>
@@ -190,16 +224,30 @@ footer{color:var(--mut);font-size:12px;text-align:center;padding-top:8px}
     <h1>{도구이름}</h1>
     <p>{한줄소개}</p>
   </header>
-  <div class="three">
+  <section class="card hero">
+    <h2>문제정의</h2>
+    <p class="stmt-xl">{조립문}</p>
+    <div class="pd">
+      <div class="row"><span class="lab">배경</span><p class="txt">{배경}</p></div>
+      <div class="row"><span class="lab">당사자</span><p class="txt">{당사자}</p></div>
+      <div class="row"><span class="lab">솔루션</span><p class="txt">{솔루션}</p></div>
+    </div>
+  </section>
+  <div class="two">
     <section class="card"><h2>왜 만드는가</h2><p class="stmt">{왜문장}</p></section>
     <section class="card"><h2>무엇을 얻으면 되는가</h2><p class="stmt">{무엇문장}</p></section>
-    <section class="card"><h2>문제정의</h2><ul>{문제정의셋}</ul></section>
   </div>
-  <section class="card"><h2>기획서와의 연결 — {기획서이름} · 기능 {기능수}개</h2><ul>{어긋남목록}</ul></section>
+  <div class="sectionlabel">기획서와의 연계 — {기획서이름} · 기능 {기능수}개</div>
+  <div class="map">
+    <div class="mhead"><span>기획서의 기능</span><span>맡는 단계</span><span>붙는 도구</span><span>상태</span></div>
+    <!-- 매핑 행 -->
+    <div class="maprow"><span class="f">{기능}</span><span class="s">{단계}</span><span class="tl">{도구}</span><span class="ln ln-ok">이어짐</span></div>
+    <!-- /매핑 행 -->
+  </div>
   <div class="sectionlabel">도구 선반</div>
   <section class="card"><div class="shelf">
     <!-- 도구 칩 -->
-    <span class="chip"><span class="t">{도구}</span><span class="c">{비용}</span></span>
+    <span class="chip"><span class="t">{도구}</span><span class="r">{역할}</span><span class="c">{비용}</span></span>
     <!-- /도구 칩 -->
     <span class="shelf-total">월 합계 {월합계}</span>
   </div></section>
@@ -222,7 +270,7 @@ footer{color:var(--mut);font-size:12px;text-align:center;padding-top:8px}
     <div class="check"><span class="verdict v-blind">못 봄</span><p class="what">{내용}</p></div>
   </div>
   <section class="card checks"><h2>체크사항</h2><ul>{체크목록}</ul></section>
-  <footer>Be_Ready_AI · 기획자 인턴 보드 v1.0.0</footer>
+  <footer>Be_Ready_AI · 기획자 인턴 보드 v1.1.0</footer>
 </div>
 </body>
 </html>
@@ -233,5 +281,6 @@ footer{color:var(--mut);font-size:12px;text-align:center;padding-top:8px}
 - 문서에 없는 내용을 만들어 넣지 않는다. 빈 칸은 「비어 있음」으로 보여준다.
 - 확인해보지 않은 것을 「확인」으로 적지 않는다. 확인할 수 없으면 「못 봄」이다.
 - 체크사항을 만들어내지 않는다. 걸리는 게 없으면 없는 것이 정상이다.
+- 매핑에서 판단이 안 서는 기능을 「이어짐」으로 좋게 봐주지 않는다.
 - 보드를 그리는 것까지다. 문서 수정은 사용자가 시킬 때 별도 작업으로 한다.
 - 보드의 Artifact 발행(기본 비공개) 외에는 외부로 보내지 않는다. 다른 업로드·게시·전송 금지. 파일은 사용자 폴더 안에만 만든다.
