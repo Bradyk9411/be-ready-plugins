@@ -18,7 +18,7 @@
     {
       "name": "pm-be-ready",
       "source": "./plugins/pm-be-ready",
-      "description": "PM 인턴 플러그인. 기획서(PRD)를 노션 워크스페이스에 프로젝트 1행과 테스크 N행으로 자동 기록한다. PM 인턴 워크샵 동봉물."
+      "description": "PM 인턴 플러그인. 기획서(PRD)를 노션에 프로젝트·테스크로 자동 기록하고, 한 주를 정리해 주간 리뷰를 만든다. PM 인턴 워크샵 동봉물."
     }
   ]
 }
