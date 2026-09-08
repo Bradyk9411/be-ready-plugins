@@ -3,17 +3,17 @@ name: prd-board
 description: PRD(기획서)나 절차 문서를 읽어 검사하고, 한 장의 보드 HTML로 그린다. "PRD를 보드로 만들어줘", "기획서 시각화해줘", "이 절차 점검해줘", "다시 그려줘" 요청에 사용한다. 설치 확인 질문("시각화 기능 설치됐어?")에는 버전과 기능을 한 줄로 답한다.
 ---
 
-# PRD 보드 (v2.2.0)
+# PRD 보드 (v2.3.0)
 
 문서를 **검사해서** 그림 한 장으로 바꾼다. 그림은 검사 결과를 담는 그릇이고, 값어치는 §3 렌즈와 §4 판정에서 나온다. 예쁘게만 그리고 검사를 건너뛰면 이 보드는 할 일을 안 한 것이다.
 
 사용자는 코딩을 모르는 1인 사업자다. 전문용어 없이, 쉬운 한국어로만 말한다. 렌즈 이름·판정 용어를 사용자에게 그대로 읊지 않는다.
 
-**우선순위 (v2.2.0)**: 기획자 인턴 플러그인(planner-board)이 설치되어 있으면, 계획 모드·계획 수립·기획 전반의 요청은 **그쪽이 상위 버전으로 우선한다.** 이 스킬은 PRD 문서 하나를 보드로 그리는 요청을 맡고, planner-board가 이어서 그리라고 넘길 때 함께 쓰인다.
+**우선순위 (v2.3.0)**: 기획자 인턴 플러그인(planner-board)이 설치되어 있으면, 계획 모드·계획 수립·기획 전반의 요청은 **그쪽이 상위 버전으로 우선한다.** 이 스킬은 PRD 문서 하나를 보드로 그리는 요청을 맡고, planner-board가 이어서 그리라고 넘길 때 함께 쓰인다.
 
 ## 설치 확인 질문을 받으면
 
-"PRD 보드 v2.2.0이 설치되어 있습니다. 기획서를 검사해서 한 장의 보드로 그려드립니다." 한 줄로 답하고 끝낸다.
+"PRD 보드 v2.3.0이 설치되어 있습니다. 기획서를 검사해서 한 장의 보드로 그려드립니다." 한 줄로 답하고 끝낸다.
 
 ## 1. 대상을 잡는다
 
@@ -129,67 +129,72 @@ description: PRD(기획서)나 절차 문서를 읽어 검사하고, 한 장의 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#1B1917;--card:#232120;--line:#3A3733;--ink:#F1ECE1;--sub:#CDC6BA;--mut:#A79F91;--volt:#C4E538;--forest:#3E4A16;--danger:#E5715C;--ok:#8FBE78}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+:root{--canvas:#FCFCF7;--s1:#F5F6EC;--line:#E6E7DD;--line2:#CDD0BF;--t1:#171512;--t2:#4A453E;--t3:#736D63;--volt:#5E6B0F;--on-volt:#FCFCF7;--danger:#92281C;--ok:#2F6B3A;--field:linear-gradient(118deg,#D2E45C 0%,#7FD9B9 100%)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans KR',-apple-system,'Malgun Gothic',sans-serif;line-height:1.65;padding:40px 20px}
+body{background:var(--canvas);color:var(--t2);font-family:'Pretendard Variable','Pretendard',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;font-size:15px;line-height:1.65;padding:40px 20px;word-break:keep-all}
 .wrap{max-width:820px;margin:0 auto;display:grid;gap:16px}
-header{padding:8px 4px 16px;border-bottom:1px solid var(--line)}
-header .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--volt)}
-header h1{font-size:26px;font-weight:700;margin:6px 0 4px}
-header p{color:var(--sub)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 20px}
-.card h2{font-size:13px;font-weight:500;color:var(--mut);letter-spacing:.08em;margin-bottom:10px}
-.card ul{list-style:none;display:grid;gap:6px}
-.card li{padding-left:14px;position:relative;color:var(--sub)}
-.card li::before{content:"";position:absolute;left:0;top:.72em;width:5px;height:5px;border-radius:50%;background:var(--mut)}
-.two{display:grid;grid-template-columns:1fr 1.4fr;gap:16px}
-.stmt{color:var(--ink);font-size:16px}
-.sectionlabel{font-size:13px;font-weight:500;color:var(--mut);letter-spacing:.08em;padding:6px 4px 0}
-.spine{display:flex;flex-direction:column}
-.node{display:grid;grid-template-columns:30px 1fr;gap:0 14px;position:relative;padding-bottom:18px}
-.node::before{content:"";position:absolute;left:14px;top:30px;bottom:0;width:2px;background:var(--line)}
-.node:last-child{padding-bottom:0}
-.node:last-child::before{display:none}
-.dot{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut);z-index:1}
-.node.io .dot{border-color:var(--forest);color:var(--volt)}
-.badge{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;border:1px solid var(--line);border-radius:3px;padding:1px 7px;color:var(--mut);white-space:nowrap}
-.node.io .badge{border-color:var(--forest);color:var(--volt)}
-.st-ok{border-color:var(--ok);color:var(--ok)}
-.st-cond{border-color:var(--mut);color:var(--sub)}
-.st-none{border-color:var(--danger);color:var(--danger)}
-.node .card{display:grid;gap:10px}
-.node .top{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
-.node .name{font-weight:700;color:var(--ink)}
-.sub{display:grid;grid-template-columns:44px 1fr;gap:0 10px;align-items:start}
-.sublabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--mut);padding-top:4px}
-.tasklist li::before{content:"☐";background:none;width:auto;height:auto;top:0;color:var(--mut)}
-.tasklist li{padding-left:20px;font-size:14px}
-.notelist li{font-size:13px;color:var(--mut)}
-.notelist li.warn{color:var(--danger)}
-.notelist li.warn::before{background:var(--danger)}
-.checks-panel{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.check{display:grid;grid-template-columns:56px 1fr;gap:0 12px;padding:11px 16px;border-bottom:1px solid var(--line);background:var(--card)}
+header{background:var(--field);border-radius:16px;padding:28px 28px 24px;color:var(--t1)}
+header .kicker{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;color:var(--t1)}
+header .kicker b{font-weight:700}
+header h1{font-family:'IBM Plex Sans KR','Pretendard Variable','Pretendard',system-ui,sans-serif;font-size:34px;font-weight:700;letter-spacing:-.05em;line-height:1;margin:8px 0 8px;color:var(--t1)}
+header p{color:#2A2620;font-size:15px}
+.card{background:transparent;border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.card h2{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.card ul{list-style:none;display:grid;gap:5px}
+.card li{padding-left:14px;position:relative;color:var(--t2)}
+.card li::before{content:"";position:absolute;left:0;top:.7em;width:4px;height:4px;border-radius:50%;background:var(--t3)}
+.stmt{color:var(--t1);font-size:15px}
+.sectionlabel{font-size:13px;font-weight:600;color:var(--t1);padding:6px 4px 0}
+.checks-panel{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.check{display:grid;grid-template-columns:56px 1fr;gap:0 12px;padding:11px 16px;border-bottom:1px solid var(--line)}
 .check:last-child{border-bottom:none}
-.verdict{font-family:'JetBrains Mono',monospace;font-size:11px;padding-top:3px}
-.v-ok{color:var(--ok)}.v-no{color:var(--danger)}.v-blind{color:var(--mut)}
-.check .what{font-size:14px;color:var(--sub)}
-.opt{border-style:dashed}
-.opt li{color:var(--mut)}
-.done li::before{content:"✓";background:none;width:auto;height:auto;top:0;color:var(--ok);font-weight:700}
-.done li{padding-left:20px}
-.checks{border-color:#5A382F}
+.verdict{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;padding-top:3px}
+.v-ok{color:var(--ok)}.v-no{color:var(--danger)}.v-blind{color:var(--t3)}
+.check .what{font-size:14px;color:var(--t2)}
+.checks{border-color:var(--line2)}
 .checks h2{color:var(--danger)}
 .checks li::before{background:var(--danger)}
 .empty{color:var(--danger);font-size:14px}
 .empty::before{content:"⚠ "}
-footer{color:var(--mut);font-size:12px;text-align:center;padding-top:8px}
+footer{display:flex;justify-content:space-between;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--t3);padding:4px 4px 0}
+footer b{color:var(--t1);font-weight:500}
+@media print{body{padding:0}header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.two{display:grid;grid-template-columns:1fr 1.4fr;gap:16px}
+.spine{display:flex;flex-direction:column}
+.node{display:grid;grid-template-columns:30px 1fr;gap:0 14px;position:relative;padding-bottom:16px}
+.node::before{content:"";position:absolute;left:14px;top:30px;bottom:0;width:1px;background:var(--line)}
+.node:last-child{padding-bottom:0}
+.node:last-child::before{display:none}
+.dot{width:30px;height:30px;border-radius:50%;border:1px solid var(--line2);background:var(--canvas);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:var(--t1)}
+.node.io .dot{border-color:var(--volt);color:var(--volt)}
+.badge{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.06em;border:1px solid var(--line);border-radius:4px;padding:1px 7px;color:var(--t3);white-space:nowrap}
+.node.io .badge{border-color:var(--volt);color:var(--volt)}
+.st-ok{color:var(--ok)}
+.st-cond{color:var(--t3)}
+.st-none{color:var(--danger)}
+.node .card{display:grid;gap:10px}
+.node .top{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.node .name{font-weight:600;color:var(--t1)}
+.sub{display:grid;grid-template-columns:44px 1fr;gap:0 10px;align-items:start}
+.sublabel{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;color:var(--t3);padding-top:4px}
+.tasklist li::before{content:"☐";background:none;width:auto;height:auto;top:0;color:var(--t3)}
+.tasklist li{padding-left:20px;font-size:14px}
+.notelist li{font-size:13px;color:var(--t3)}
+.notelist li.warn{color:var(--danger)}
+.notelist li.warn::before{background:var(--danger)}
+.opt{border-style:dashed}
+.opt li{color:var(--t3)}
+.done li::before{content:"✓";background:none;width:auto;height:auto;top:0;color:var(--ok);font-weight:700}
+.done li{padding-left:20px}
 @media (max-width:700px){.two{grid-template-columns:1fr}.sub{grid-template-columns:1fr;gap:2px}.check{grid-template-columns:1fr;gap:2px}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="kicker">PRD BOARD</div>
+    <div class="kicker"><b>_</b>prd-board</div>
     <h1>{도구이름}</h1>
     <p>{한줄소개}</p>
   </header>
@@ -233,7 +238,7 @@ footer{color:var(--mut);font-size:12px;text-align:center;padding-top:8px}
   <section class="card opt"><h2>없어도 되는 것 (나중에)</h2><ul><li>{내용}</li></ul></section>
   <section class="card done"><h2>인턴 설계 완료 기준</h2><ul><li>{내용}</li></ul></section>
   <section class="card checks"><h2>체크사항</h2><ul>{체크목록}</ul></section>
-  <footer>Be_Ready_AI · PRD 보드 v2.2.0</footer>
+  <footer><b>Be_Ready_</b><span>prd-board v2.3.0</span></footer>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@ name: planner-board
 description: 기획 문서들(문제정의·PRD·도구지도·프로세스)이나 수립된 계획을 읽어 검사하고, 문제정의·기획서 연계 매핑·도구·프로세스 흐름이 담긴 한 장의 보드 HTML로 그린다. "기획자 인턴 보드 그려줘", "도구 지도 보여줘", "프로세스 시각화해줘", "다시 그려줘" 요청에 사용한다. 계획 모드(플랜 모드)에서 계획을 세울 때도 사용한다 — 계획 전에 왜/무엇을 물어 값을 받고, 계획이 승인되면 무조건 보드를 그린다. prd-board보다 이 스킬이 우선한다. 설치 확인 질문("기획자 인턴 플러그인 설치됐어?")에는 버전과 기능을 한 줄로 답한다.
 ---
 
-# 기획자 인턴 보드 (v2.0.0)
+# 기획자 인턴 보드 (v2.1.0)
 
 기획 문서 네 개를 **검사해서** 그림 한 장으로 바꾼다. 보드는 네 부분이다. ① **문제정의** (조립된 한 문장 + 배경·당사자·솔루션), ② **기획서와의 연계** (PRD 기능마다 어느 단계·도구가 맡는지 매핑), ③ **도구 선반** (각 도구가 무슨 일을 하는지 + 비용), ④ **작동의 흐름** (단계마다 어느 도구에서, 누가, 어떤 데이터를 주고받는지). 예쁘게만 그리고 검사를 건너뛰면 이 보드는 할 일을 안 한 것이다.
 
@@ -11,9 +11,9 @@ description: 기획 문서들(문제정의·PRD·도구지도·프로세스)이�
 
 ## 설치 확인 질문을 받으면
 
-"기획자 인턴 플러그인 v2.0.0이 설치되어 있습니다. 기획 문서를 검사해서 문제정의·도구·프로세스 보드 한 장으로 그려드립니다." 한 줄로 답하고 끝낸다.
+"기획자 인턴 플러그인 v2.1.0이 설치되어 있습니다. 기획 문서를 검사해서 문제정의·도구·프로세스 보드 한 장으로 그려드립니다." 한 줄로 답하고 끝낸다.
 
-## 0. 계획 모드와 함께 (v2.0.0)
+## 0. 계획 모드와 함께 (v2.1.0)
 
 계획 모드(플랜 모드)와 이 보드는 한 쌍이다.
 
@@ -149,89 +149,93 @@ description: 기획 문서들(문제정의·PRD·도구지도·프로세스)이�
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#1B1917;--card:#232120;--line:#3A3733;--ink:#F1ECE1;--sub:#CDC6BA;--mut:#A79F91;--volt:#C4E538;--forest:#3E4A16;--danger:#E5715C;--ok:#8FBE78}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+:root{--canvas:#FCFCF7;--s1:#F5F6EC;--line:#E6E7DD;--line2:#CDD0BF;--t1:#171512;--t2:#4A453E;--t3:#736D63;--volt:#5E6B0F;--on-volt:#FCFCF7;--danger:#92281C;--ok:#2F6B3A;--field:linear-gradient(118deg,#FFD670 0%,#D2E45C 100%)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans KR',-apple-system,'Malgun Gothic',sans-serif;line-height:1.65;padding:40px 20px}
+body{background:var(--canvas);color:var(--t2);font-family:'Pretendard Variable','Pretendard',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;font-size:15px;line-height:1.65;padding:40px 20px;word-break:keep-all}
 .wrap{max-width:980px;margin:0 auto;display:grid;gap:16px}
-header{padding:8px 4px 16px;border-bottom:1px solid var(--line)}
-header .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--volt)}
-header h1{font-size:26px;font-weight:700;margin:6px 0 4px}
-header p{color:var(--sub)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 20px}
-.card h2{font-size:13px;font-weight:500;color:var(--mut);letter-spacing:.08em;margin-bottom:10px}
-.card ul{list-style:none;display:grid;gap:6px}
-.card li{padding-left:14px;position:relative;color:var(--sub)}
-.card li::before{content:"";position:absolute;left:0;top:.72em;width:5px;height:5px;border-radius:50%;background:var(--mut)}
-.stmt{color:var(--ink);font-size:16px}
-.hero{border-color:var(--forest)}
-.hero h2{color:var(--volt)}
-.stmt-xl{font-size:19px;font-weight:700;color:var(--ink);line-height:1.55}
-.pd{display:grid;gap:7px;margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
-.pd .row{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start}
-.pd .lab{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--volt);padding-top:5px}
-.pd .txt{color:var(--sub);font-size:14px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.sectionlabel{font-size:13px;font-weight:500;color:var(--mut);letter-spacing:.08em;padding:6px 4px 0}
-.map{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.map .mhead,.maprow{display:grid;grid-template-columns:1.1fr 1.2fr .8fr 84px;gap:0 14px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--line)}
-.map .mhead{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--mut);padding:8px 16px}
-.maprow:last-child{border-bottom:none}
-.maprow .f{color:var(--ink);font-weight:500;font-size:14px}
-.maprow .s{color:var(--sub);font-size:13px}
-.maprow .tl{color:var(--sub);font-size:13px}
-.ln{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;border:1px solid var(--line);border-radius:3px;padding:1px 8px;justify-self:start;align-self:center;white-space:nowrap}
-.ln-ok{border-color:var(--ok);color:var(--ok)}
-.ln-gap{border-color:var(--danger);color:var(--danger)}
-.ln-tool{border-color:var(--mut);color:var(--sub)}
-.shelf{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
-.chip{display:grid;gap:3px;border:1px solid var(--line);border-radius:6px;padding:9px 14px;background:var(--card);min-width:150px}
-.chip .t{font-weight:700;color:var(--ink);font-size:14px}
-.chip .r{font-size:12px;color:var(--mut);line-height:1.45}
-.chip .c{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut)}
-.chip .c.paid{color:var(--volt)}
-.shelf-total{margin-left:auto;align-self:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--volt)}
-.canvas{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:
-  radial-gradient(circle,#2A2724 1px,transparent 1px) 0 0/22px 22px,var(--bg);padding:26px 22px}
-.flow{display:flex;align-items:stretch;min-width:max-content}
-.fnode{width:225px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:13px 15px;display:grid;gap:8px;align-content:start}
-.fnode.me{border-color:var(--volt);box-shadow:0 0 0 1px var(--volt) inset}
-.fnode .top{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.no{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut)}
-.act{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;border:1px solid var(--line);border-radius:3px;padding:1px 7px;white-space:nowrap}
-.act-user{border-color:var(--mut);color:var(--sub)}
-.act-me{border-color:var(--volt);color:var(--volt)}
-.act-ai{border-color:var(--ok);color:var(--ok)}
-.act-auto{border-style:dashed;color:var(--mut)}
-.act-none{border-color:var(--danger);color:var(--danger)}
-.gate{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--bg);background:var(--volt);border-radius:3px;padding:1px 7px}
-.fnode .name{font-weight:700;font-size:14px;color:var(--ink)}
-.tool{display:inline-flex;gap:6px;align-items:baseline;font-size:12px;color:var(--sub)}
-.tool::before{content:"⚙";color:var(--mut)}
-.data{border-top:1px dashed var(--line);padding-top:7px;font-size:12px;color:var(--mut)}
-.data b{color:var(--sub);font-weight:500}
-.link{width:34px;flex:none;position:relative;align-self:center;height:2px;background:var(--line)}
-.link::after{content:"";position:absolute;right:-1px;top:-4px;border:5px solid transparent;border-left-color:var(--line)}
-.checks-panel{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.check{display:grid;grid-template-columns:56px 1fr;gap:0 12px;padding:11px 16px;border-bottom:1px solid var(--line);background:var(--card)}
+header{background:var(--field);border-radius:16px;padding:28px 28px 24px;color:var(--t1)}
+header .kicker{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;color:var(--t1)}
+header .kicker b{font-weight:700}
+header h1{font-family:'IBM Plex Sans KR','Pretendard Variable','Pretendard',system-ui,sans-serif;font-size:34px;font-weight:700;letter-spacing:-.05em;line-height:1;margin:8px 0 8px;color:var(--t1)}
+header p{color:#2A2620;font-size:15px}
+.card{background:transparent;border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.card h2{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.card ul{list-style:none;display:grid;gap:5px}
+.card li{padding-left:14px;position:relative;color:var(--t2)}
+.card li::before{content:"";position:absolute;left:0;top:.7em;width:4px;height:4px;border-radius:50%;background:var(--t3)}
+.stmt{color:var(--t1);font-size:15px}
+.sectionlabel{font-size:13px;font-weight:600;color:var(--t1);padding:6px 4px 0}
+.checks-panel{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.check{display:grid;grid-template-columns:56px 1fr;gap:0 12px;padding:11px 16px;border-bottom:1px solid var(--line)}
 .check:last-child{border-bottom:none}
-.verdict{font-family:'JetBrains Mono',monospace;font-size:11px;padding-top:3px}
-.v-ok{color:var(--ok)}.v-no{color:var(--danger)}.v-blind{color:var(--mut)}
-.check .what{font-size:14px;color:var(--sub)}
-.checks{border-color:#5A382F}
+.verdict{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;padding-top:3px}
+.v-ok{color:var(--ok)}.v-no{color:var(--danger)}.v-blind{color:var(--t3)}
+.check .what{font-size:14px;color:var(--t2)}
+.checks{border-color:var(--line2)}
 .checks h2{color:var(--danger)}
 .checks li::before{background:var(--danger)}
-.checks li.exp{color:var(--mut)}
-.checks li.exp::before{background:var(--mut)}
 .empty{color:var(--danger);font-size:14px}
 .empty::before{content:"⚠ "}
-footer{color:var(--mut);font-size:12px;text-align:center;padding-top:8px}
+footer{display:flex;justify-content:space-between;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--t3);padding:4px 4px 0}
+footer b{color:var(--t1);font-weight:500}
+@media print{body{padding:0}header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.hero{border-color:var(--line2)}
+.hero h2{color:var(--t1)}
+.stmt-xl{font-family:'IBM Plex Sans KR','Pretendard Variable','Pretendard',system-ui,sans-serif;font-size:20px;font-weight:700;letter-spacing:-.02em;color:var(--t1);line-height:1.45}
+.pd{display:grid;gap:7px;margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+.pd .row{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start}
+.pd .lab{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.12em;color:var(--t3);padding-top:5px}
+.pd .txt{color:var(--t2);font-size:14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.map{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.map .mhead,.maprow{display:grid;grid-template-columns:1.1fr 1.2fr .8fr 84px;gap:0 14px;padding:10px 16px;border-bottom:1px solid var(--line)}
+.map .mhead{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;color:var(--t3);padding:8px 16px;background:var(--s1)}
+.maprow:last-child{border-bottom:none}
+.maprow .f{color:var(--t1);font-weight:600;font-size:14px}
+.maprow .s{color:var(--t2);font-size:13px}
+.maprow .tl{color:var(--t2);font-size:13px}
+.ln{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.06em;border:1px solid var(--line);border-radius:4px;padding:1px 8px;justify-self:start;align-self:center;white-space:nowrap;color:var(--t3)}
+.ln-ok{color:var(--ok)}
+.ln-gap{color:var(--danger)}
+.ln-tool{color:var(--t3)}
+.shelf{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+.chip{display:grid;gap:3px;border:1px solid var(--line);border-radius:10px;padding:9px 14px;min-width:150px}
+.chip .t{font-weight:600;color:var(--t1);font-size:14px}
+.chip .r{font-size:12px;color:var(--t3);line-height:1.45}
+.chip .c{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:var(--t3);font-variant-numeric:tabular-nums}
+.chip .c.paid{color:var(--volt)}
+.shelf-total{margin-left:auto;align-self:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--t1);font-variant-numeric:tabular-nums}
+.canvas{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:radial-gradient(circle,var(--line2) 1px,transparent 1px) 0 0/22px 22px,var(--canvas);padding:26px 22px}
+.flow{display:flex;align-items:stretch;min-width:max-content}
+.fnode{width:225px;background:var(--canvas);border:1px solid var(--line);border-radius:12px;padding:13px 15px;display:grid;gap:8px;align-content:start}
+.fnode.me{border-color:var(--volt)}
+.fnode .top{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.no{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:var(--t3)}
+.act{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.06em;border:1px solid var(--line);border-radius:4px;padding:1px 7px;white-space:nowrap;color:var(--t3)}
+.act-user{color:var(--t2)}
+.act-me{border-color:var(--volt);color:var(--volt)}
+.act-ai{color:var(--ok)}
+.act-auto{border-style:dashed;color:var(--t3)}
+.act-none{color:var(--danger)}
+.gate{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:var(--on-volt);background:var(--volt);border-radius:4px;padding:1px 7px}
+.fnode .name{font-weight:600;font-size:14px;color:var(--t1)}
+.tool{display:inline-flex;gap:6px;align-items:baseline;font-size:12px;color:var(--t2)}
+.tool::before{content:"⚙";color:var(--t3)}
+.data{border-top:1px dashed var(--line);padding-top:7px;font-size:12px;color:var(--t3)}
+.data b{color:var(--t2);font-weight:500}
+.link{width:34px;flex:none;position:relative;align-self:center;height:1px;background:var(--line2)}
+.link::after{content:"";position:absolute;right:-1px;top:-4px;border:5px solid transparent;border-left-color:var(--line2)}
+.checks li.exp{color:var(--t3)}
+.checks li.exp::before{background:var(--t3)}
 @media (max-width:760px){.two{grid-template-columns:1fr}.map .mhead{display:none}.maprow{grid-template-columns:1fr;gap:4px}.check{grid-template-columns:1fr;gap:2px}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="kicker">PLANNER BOARD</div>
+    <div class="kicker"><b>_</b>planner-board</div>
     <h1>{도구이름}</h1>
     <p>{한줄소개}</p>
   </header>
@@ -281,7 +285,7 @@ footer{color:var(--mut);font-size:12px;text-align:center;padding-top:8px}
     <div class="check"><span class="verdict v-blind">못 봄</span><p class="what">{내용}</p></div>
   </div>
   <section class="card checks"><h2>체크사항</h2><ul>{체크목록}</ul></section>
-  <footer>Be_Ready_AI · 기획자 인턴 보드 v2.0.0</footer>
+  <footer><b>Be_Ready_</b><span>planner-board v2.1.0</span></footer>
 </div>
 </body>
 </html>
